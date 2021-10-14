@@ -1,4 +1,5 @@
 import './MovieList.scss';
+import errorPoster from './error.png';
 
 export default function MovieList({ movies }) {
   return (
@@ -8,7 +9,11 @@ export default function MovieList({ movies }) {
           <div className="movieCard">
             <img
               className="poster"
-              src={'https://image.tmdb.org/t/p/w300' + poster_path}
+              src={
+                poster_path
+                  ? `https://image.tmdb.org/t/p/w300` + poster_path
+                  : errorPoster
+              }
               alt={title}
             />
             <div className="movieCard__details">
