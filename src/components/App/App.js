@@ -5,6 +5,8 @@ import AppBar from '../AppBar/AppBar';
 import Container from '../Container/Container';
 import HomePage from '../../pages/HomePage/HomePage';
 import MoviesPage from '../../pages/MoviesPage/MoviesPage';
+import MovieDetailsPage from '../../pages/MovieDetailsPage/MovieDetailsPage';
+import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 
 export default function App() {
   return (
@@ -16,8 +18,14 @@ export default function App() {
             <Route exact path="/">
               <HomePage />
             </Route>
-            <Route path="/movies">
+            <Route path="/movies/:movieId">
+              <MovieDetailsPage />
+            </Route>
+            <Route exact path="/movies">
               <MoviesPage />
+            </Route>
+            <Route>
+              <NotFoundPage />
             </Route>
           </Switch>
         </Suspense>
