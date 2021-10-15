@@ -1,0 +1,48 @@
+@import '../../styles/shared.scss';
+
+.movieArticle {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 10px 10px;
+  border-radius: 8px;
+  border: 2px solid #b00b6842;
+  box-shadow: $box-shadow;
+}
+
+.posterThumb {
+  width: 280px;
+  margin-right: 10px;
+}
+
+.poster {
+  border-radius: 5px;
+}
+
+.infoThumb {
+  padding: 0;
+  margin: 0;
+}
+
+.movieTitle {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.label,
+.score {
+  margin-bottom: 10px;
+}
+
+.overview {
+  max-width: 600px;
+  margin-bottom: 10px;
+}
+
+.genresList {
+  margin-top: 10px;
+  &__item {
+    margin-bottom: 5px;
+  }
+}

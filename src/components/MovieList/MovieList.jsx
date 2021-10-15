@@ -1,4 +1,4 @@
-import { Link, Route, useRouteMatch } from 'react-router-dom';
+import { NavLink, Route, useRouteMatch } from 'react-router-dom';
 import './MovieList.scss';
 import errorPoster from './error.png';
 
@@ -8,14 +8,14 @@ export default function MovieList({ movies }) {
   return (
     <>
       {movies.length === 0 && (
-        <h3 style={{ marginTop: '10px' }}>
-          Nothing to show! 😎 Use Search above😉
-        </h3>
+        <h4 style={{ marginTop: '10px' }}>
+          Nothing to show! Use Search above😉
+        </h4>
       )}
       <ul className="movieList">
         {movies.map(({ id, title, poster_path, release_date }) => (
           <li key={id} className="movieList__elem">
-            <Link to={`/movies/${id}`}>
+            <NavLink to={`/movies/${id}`} className="movieCardLink">
               <div className="movieCard">
                 <img
                   className="poster"
@@ -32,7 +32,7 @@ export default function MovieList({ movies }) {
                   {release_date && <span> ({release_date.slice(0, 4)})</span>}
                 </div>
               </div>
-            </Link>
+            </NavLink>
           </li>
         ))}
       </ul>

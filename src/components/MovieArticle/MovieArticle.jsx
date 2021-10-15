@@ -1,4 +1,7 @@
 import posterError from '../../components/MovieList/error.png';
+import BackButton from '../BackButton/BackButton';
+import { ReactComponent as BackIcon } from '../BackButton/backArrow.svg';
+import './MovieArticle.scss';
 
 export default function MovieArticle({ movie }) {
   const { title, release_date, vote_average, poster_path, overview, genres } =
@@ -19,7 +22,7 @@ export default function MovieArticle({ movie }) {
           />
         </div>
 
-        <div>
+        <div className="infoThumb">
           {title && (
             <h1 className="movieTitle">
               {title}{' '}
@@ -33,12 +36,13 @@ export default function MovieArticle({ movie }) {
 
           <p className="score">
             {vote_average ? (
-              <b className="votes">Average Vote: {vote_average}</b>
+              <b className="votes">Average Vote: {vote_average} ⭐</b>
             ) : null}
           </p>
 
           <p className="overview">
-            <b className="label">Overview: </b>
+            <b className="label">Overview: 📝</b>
+            <br />
             {overview ? <span>{overview}</span> : <span>N/A</span>}
           </p>
 
@@ -48,7 +52,7 @@ export default function MovieArticle({ movie }) {
             <ul className="genresList">
               {genres.map(({ id, name }) => (
                 <li key={id} className="genresList__item">
-                  <span>{name}</span>
+                  <span>🎥 {name}</span>
                 </li>
               ))}
             </ul>
@@ -56,6 +60,9 @@ export default function MovieArticle({ movie }) {
             <span>N/A</span>
           )}
         </div>
+        <BackButton>
+          <BackIcon width="30" height="30" fill="black" />
+        </BackButton>
       </article>
     </>
   );

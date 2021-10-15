@@ -2,6 +2,9 @@
 
 body {
   font-family: $primary-font-stack;
+  background-color: #e3fffd;
+  background: linear-gradient(to right, #c9f5f2, #fad0f1);
+  // background-repeat: no-repeat;
 }
 button {
   cursor: pointer;

@@ -36,3 +36,27 @@ export async function getMovieById(id) {
     console.error(error);
   }
 }
+
+export async function fetchCast(id) {
+  try {
+    const { data } = await axios.get(
+      `${ID_URL}${id}/credits?api_key=${API_KEY}`
+    );
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchReviews(id) {
+  try {
+    const { data } = await axios.get(
+      `${ID_URL}${id}/reviews?api_key=${API_KEY}&page=1`
+    );
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}

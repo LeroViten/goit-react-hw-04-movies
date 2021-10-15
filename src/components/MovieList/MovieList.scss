@@ -35,7 +35,12 @@
     &:hover,
     &:focus {
       box-shadow: 0 6px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-      transform: scale(0.96);
+      transform: scale(1.04);
     }
   }
+}
+
+.movieCardLink {
+  text-decoration: none;
+  color: #000;
 }

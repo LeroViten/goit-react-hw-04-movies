@@ -5,6 +5,8 @@ import * as movieAPI from '../../services/apiService';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import MovieArticle from '../../components/MovieArticle/MovieArticle';
+import Cast from './Cast/Cast';
+import Reviews from './Reviews/Reviews';
 
 export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
@@ -41,6 +43,10 @@ export default function MovieDetailsPage() {
         />
       )}
       {movie && <MovieArticle movie={movie} />}
+      <hr />
+      {movie && <Cast movie={movie} />}
+      <hr />
+      {movie && <Reviews movie={movie} />}
     </>
   );
 }

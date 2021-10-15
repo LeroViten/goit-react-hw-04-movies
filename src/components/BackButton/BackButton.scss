@@ -1,0 +1,20 @@
+@import '../../styles/shared.scss';
+
+.backButton {
+  position: absolute;
+  top: 5%;
+  left: 2%;
+  display: flex;
+  align-items: center;
+  font-size: large;
+  background-color: #bdfaf669;
+  border: none;
+  border-radius: 4px;
+  margin-right: 5px;
+  box-shadow: $box-shadow;
+  transition: transform $transition-duration $transition-function;
+
+  &:hover {
+    transform: scale(1.06);
+  }
+}

@@ -5,6 +5,7 @@ import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import * as movieAPI from '../../services/apiService';
 import MovieList from '../../components/MovieList/MovieList';
+import './MoviesPage.scss';
 
 export default function MoviesPage() {
   const [query, setQuery] = useState('');
@@ -42,6 +43,7 @@ export default function MoviesPage() {
       <form onSubmit={handleSubmit}>
         <label>
           <input
+            className="movieInput"
             type="text"
             name="movie"
             placeholder="Enter movie..."
@@ -50,7 +52,9 @@ export default function MoviesPage() {
             value={query}
           />
         </label>
-        <button type="submit">Search</button>
+        <button type="submit" className="searchBtn">
+          Search
+        </button>
       </form>
       {status === 'pending' && (
         <Loader
