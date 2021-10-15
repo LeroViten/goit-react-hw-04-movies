@@ -2,10 +2,21 @@ import posterError from '../../components/MovieList/error.png';
 import BackButton from '../BackButton/BackButton';
 import { ReactComponent as BackIcon } from '../BackButton/backArrow.svg';
 import './MovieArticle.scss';
+import { Link, Route, useRouteMatch } from 'react-router-dom';
 
 export default function MovieArticle({ movie }) {
-  const { title, release_date, vote_average, poster_path, overview, genres } =
-    movie;
+  const {
+    title,
+    id,
+    release_date,
+    vote_average,
+    poster_path,
+    overview,
+    genres,
+  } = movie;
+  const { url, path } = useRouteMatch();
+  // console.log(url);
+  // console.log(path);
   const properPosterUrl = poster_path
     ? `https://image.tmdb.org/t/p/w500${poster_path}`
     : posterError;
@@ -64,6 +75,17 @@ export default function MovieArticle({ movie }) {
           <BackIcon width="30" height="30" fill="black" />
         </BackButton>
       </article>
+      <div className="additionalInfoThumb">
+        <p className="additionalText">Additional Information for the movie:</p>
+        <div className="addOnsLinks">
+          <Link to={`${url}/cast`} className="showAddonLink">
+            Cast
+          </Link>
+          <Link to={`${url}/reviews`} className="showAddonLink">
+            Reviews
+          </Link>
+        </div>
+      </div>
     </>
   );
 }

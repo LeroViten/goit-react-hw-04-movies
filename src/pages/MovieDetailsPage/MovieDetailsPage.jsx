@@ -15,6 +15,9 @@ export default function MovieDetailsPage() {
   const history = useHistory();
   const location = useLocation();
   const match = useRouteMatch();
+  const { url, path } = useRouteMatch();
+  console.log(url);
+  console.log(path);
 
   useEffect(() => {
     getMovieData();
@@ -44,9 +47,14 @@ export default function MovieDetailsPage() {
       )}
       {movie && <MovieArticle movie={movie} />}
       <hr />
-      {movie && <Cast movie={movie} />}
-      <hr />
-      {movie && <Reviews movie={movie} />}
+      <Switch>
+        <Route exact path={`${url}/cast`}>
+          {movie && <Cast movie={movie} />}
+        </Route>
+        <Route exact path={`${url}/reviews`}>
+          {movie && <Reviews movie={movie} />}
+        </Route>
+      </Switch>
     </>
   );
 }
