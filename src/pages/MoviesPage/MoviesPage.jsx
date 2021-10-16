@@ -24,7 +24,7 @@ export default function MoviesPage() {
     getData();
   }, [userQuery]);
 
-  const getData = async () => {
+  const getData = () => {
     if (userQuery.trim() === '') {
       toast.error('Nothing found, repeat search! 😊');
       return;

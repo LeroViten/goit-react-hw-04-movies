@@ -34,7 +34,7 @@ export default function SearchForm({ searchHandler }) {
             className="movieInput"
             type="text"
             name="movie"
-            placeholder="Enter movie..."
+            placeholder="Enter movie name..."
             autoComplete="off"
             onChange={handleInput}
             value={query}

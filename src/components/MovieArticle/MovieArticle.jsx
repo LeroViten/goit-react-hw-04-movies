@@ -15,6 +15,9 @@ export default function MovieArticle({ movie }) {
 
   return (
     <>
+      <BackButton>
+        <BackIcon width="30" height="30" fill="black" />
+      </BackButton>
       <article className="movieArticle">
         <div className="posterThumb">
           <img
@@ -63,9 +66,6 @@ export default function MovieArticle({ movie }) {
             <span>N/A</span>
           )}
         </div>
-        <BackButton>
-          <BackIcon width="30" height="30" fill="black" />
-        </BackButton>
       </article>
       <div className="additionalInfoThumb">
         <p className="additionalText">Additional Information for the movie:</p>

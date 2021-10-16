@@ -1,7 +1,6 @@
 @import '../../styles/shared.scss';
 
 .movieArticle {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -69,11 +68,13 @@
   border-radius: 4px;
   padding: 5px 20px;
   margin-right: 10px;
-  background-color: #b0e4f8;
+  margin-top: 5px;
+  background-color: #e2f7ff;
+  color: black;
   transition: all $transition-duration $transition-function;
 
   &:hover {
-    background-color: #90c5c5f1;
+    background-color: #cab7c3f1;
     transform: scale(0.98);
   }
 }

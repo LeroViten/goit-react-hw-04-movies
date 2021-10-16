@@ -1,20 +1,19 @@
 @import '../../styles/shared.scss';
 
 .backButton {
-  position: absolute;
-  top: 5%;
-  left: 2%;
   display: flex;
   align-items: center;
   font-size: large;
-  background-color: #bdfaf669;
-  border: none;
+  background-color: #ddf8f669;
+  border: 2px solid #b00b6842;
+  color: black;
   border-radius: 4px;
   margin-right: 5px;
-  box-shadow: $box-shadow;
+  margin-bottom: 5px;
   transition: transform $transition-duration $transition-function;
 
   &:hover {
-    transform: scale(1.06);
+    transform: scale(1.04);
+    box-shadow: $box-shadow;
   }
 }
