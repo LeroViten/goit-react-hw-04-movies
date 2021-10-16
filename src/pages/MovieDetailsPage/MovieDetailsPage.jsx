@@ -15,17 +15,15 @@ export default function MovieDetailsPage() {
   const history = useHistory();
   const location = useLocation();
   const match = useRouteMatch();
-  const { url, path } = useRouteMatch();
+  const { url } = useRouteMatch();
+  const { movieId } = match.params;
   console.log(url);
-  console.log(path);
 
   useEffect(() => {
     getMovieData();
   }, []);
 
   const getMovieData = () => {
-    const { movieId } = match.params;
-
     setStatus('pending');
     movieAPI.getMovieById(movieId).then((response) => {
       setMovie(response);

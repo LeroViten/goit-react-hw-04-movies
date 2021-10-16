@@ -1,29 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
+import queryString from 'query-string';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import * as movieAPI from '../../services/apiService';
 import MovieList from '../../components/MovieList/MovieList';
+import SearchForm from '../../components/SearchForm/SearchForm';
 import './MoviesPage.scss';
 
 export default function MoviesPage() {
-  const [query, setQuery] = useState('');
+  const location = useLocation();
+  const history = useHistory();
+  const query = new URLSearchParams(location.search).get('query');
+
+  const [userQuery, setUserQuery] = useState(query ?? '');
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState('idle');
 
-  const handleChange = ({ target }) => {
-    setQuery(target.value);
-  };
+  useEffect(() => {
+    if (!userQuery) return;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (query.trim() === '') {
+    getData();
+  }, [userQuery]);
+
+  const getData = async () => {
+    if (userQuery.trim() === '') {
       toast.error('Nothing found, repeat search! 😊');
       return;
     }
     setStatus('pending');
-    movieAPI.getMovieSearch(query).then((response) => {
+    movieAPI.getMovieSearch(userQuery).then((response) => {
       const movies = response.results;
       if (movies.length < 1) {
         toast.error(`We've found nothing for your word 😢`);
@@ -31,31 +39,21 @@ export default function MoviesPage() {
       setMovies(movies);
     });
     setStatus('resolved');
-    reset();
   };
 
-  const reset = () => {
-    setQuery('');
+  const handleQuery = (newQuery) => {
+    setUserQuery(newQuery);
+    setMovies([]);
+
+    // pushing user search to queryString for proper return with Back button
+    history.push({
+      ...location,
+      search: `query=${newQuery}`,
+    });
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <input
-            className="movieInput"
-            type="text"
-            name="movie"
-            placeholder="Enter movie..."
-            autoComplete="off"
-            onChange={handleChange}
-            value={query}
-          />
-        </label>
-        <button type="submit" className="searchBtn">
-          Search
-        </button>
-      </form>
       {status === 'pending' && (
         <Loader
           className="Loader"
@@ -66,6 +64,7 @@ export default function MoviesPage() {
           timeout={1000}
         />
       )}
+      <SearchForm searchHandler={handleQuery} />
       <MovieList movies={movies} />
       <ToastContainer transition={Zoom} autoClose={3000} />
     </>

@@ -1,9 +1,10 @@
-import { NavLink, Route, useRouteMatch } from 'react-router-dom';
+import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
 import './MovieList.scss';
 import errorPoster from './error.png';
 
 export default function MovieList({ movies }) {
   const { url, path } = useRouteMatch();
+  const location = useLocation();
 
   return (
     <>
@@ -15,7 +16,13 @@ export default function MovieList({ movies }) {
       <ul className="movieList">
         {movies.map(({ id, title, poster_path, release_date }) => (
           <li key={id} className="movieList__elem">
-            <NavLink to={`/movies/${id}`} className="movieCardLink">
+            <NavLink
+              to={{
+                pathname: `/movies/${id}`,
+                state: { from: location },
+              }}
+              className="movieCardLink"
+            >
               <div className="movieCard">
                 <img
                   className="poster"
