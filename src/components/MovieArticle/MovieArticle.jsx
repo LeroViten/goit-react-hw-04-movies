@@ -1,4 +1,5 @@
 import { Link, useRouteMatch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import BackButton from '../BackButton/BackButton';
 import posterError from '../../components/MovieList/error.png';
 import { ReactComponent as BackIcon } from '../BackButton/backArrow.svg';
@@ -81,3 +82,8 @@ export default function MovieArticle({ movie }) {
     </>
   );
 }
+
+MovieArticle.propTypes = {
+  movie: PropTypes.object,
+  url: PropTypes.string,
+};

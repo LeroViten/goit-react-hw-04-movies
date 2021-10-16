@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import * as movieAPI from '../../../services/apiService';
 import Loader from 'react-loader-spinner';
+import PropTypes from 'prop-types';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './Cast.scss';
 import errorPoster from '../../../components/MovieList/error.png';
 
-export default function Cast({ movie }) {
+export default function Cast() {
   const [actors, setActors] = useState([]);
   const [status, setStatus] = useState('idle');
 
-  const { id } = movie;
+  const { movieId } = useParams();
 
   useEffect(() => {
     fetchData();
@@ -17,7 +19,7 @@ export default function Cast({ movie }) {
 
   const fetchData = () => {
     setStatus('pending');
-    movieAPI.fetchCast(id).then((response) => {
+    movieAPI.fetchCast(movieId).then((response) => {
       setActors(response.cast);
     });
     setStatus('resolved');
@@ -69,3 +71,7 @@ export default function Cast({ movie }) {
     </>
   );
 }
+
+Cast.propTypes = {
+  movieId: PropTypes.string,
+};

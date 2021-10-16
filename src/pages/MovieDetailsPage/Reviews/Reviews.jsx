@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import PropTypes from 'prop-types';
 import * as movieAPI from '../../../services/apiService';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './Reviews.scss';
 
-export default function Reviews({ movie }) {
+export default function Reviews() {
   const [reviews, setReviews] = useState([]);
   const [status, setStatus] = useState('idle');
 
-  const { id } = movie;
+  const { movieId } = useParams();
 
   useEffect(() => {
     fetchData();
@@ -16,7 +18,7 @@ export default function Reviews({ movie }) {
 
   const fetchData = () => {
     setStatus('pending');
-    movieAPI.fetchReviews(id).then((response) => {
+    movieAPI.fetchReviews(movieId).then((response) => {
       setReviews(response.results);
     });
     setStatus('resolved');
@@ -69,3 +71,7 @@ export default function Reviews({ movie }) {
     </>
   );
 }
+
+Reviews.propTypes = {
+  movieId: PropTypes.string,
+};

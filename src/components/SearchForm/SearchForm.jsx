@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
+import PropTypes from 'prop-types';
 import 'react-toastify/dist/ReactToastify.css';
 import './SearchForm.scss';
 
@@ -48,3 +49,7 @@ export default function SearchForm({ searchHandler }) {
     </>
   );
 }
+
+SearchForm.propTypes = {
+  searchHandler: PropTypes.func,
+};

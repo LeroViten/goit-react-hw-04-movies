@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import errorPoster from './error.png';
 import './MovieList.scss';
 
@@ -40,3 +41,8 @@ export default function MovieList({ movies }) {
     </>
   );
 }
+
+MovieList.propTypes = {
+  movies: PropTypes.array,
+  location: PropTypes.object,
+};

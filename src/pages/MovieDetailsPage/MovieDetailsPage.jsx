@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useRouteMatch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as movieAPI from '../../services/apiService';
 import MovieArticle from '../../components/MovieArticle/MovieArticle';
 import Cast from './Cast/Cast';
@@ -13,7 +14,7 @@ export default function MovieDetailsPage() {
   const [status, setStatus] = useState('idle');
 
   const match = useRouteMatch();
-  const { url } = useRouteMatch();
+  const { path } = useRouteMatch();
   const { movieId } = match.params;
 
   useEffect(() => {
@@ -42,13 +43,19 @@ export default function MovieDetailsPage() {
       {movie && <MovieArticle movie={movie} />}
       <hr />
       <Switch>
-        <Route exact path={`${url}/cast`}>
-          {movie && <Cast movie={movie} />}
+        <Route exact path={`${path}/cast`}>
+          {movie && <Cast />}
         </Route>
-        <Route exact path={`${url}/reviews`}>
-          {movie && <Reviews movie={movie} />}
+        <Route exact path={`${path}/reviews`}>
+          {movie && <Reviews />}
         </Route>
       </Switch>
     </>
   );
 }
+
+MovieDetailsPage.propTypes = {
+  match: PropTypes.object,
+  url: PropTypes.string,
+  movieId: PropTypes.string,
+};

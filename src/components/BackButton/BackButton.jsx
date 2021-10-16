@@ -1,4 +1,5 @@
 import { useHistory, useLocation } from 'react-router';
+import PropTypes from 'prop-types';
 import './BackButton.scss';
 
 export default function BackButton({ children }) {
@@ -15,3 +16,7 @@ export default function BackButton({ children }) {
     </button>
   );
 }
+
+BackButton.propTypes = {
+  children: PropTypes.node,
+};
