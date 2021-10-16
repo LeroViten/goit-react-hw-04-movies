@@ -4,7 +4,6 @@ import './BackButton.scss';
 export default function BackButton({ children }) {
   const history = useHistory();
   const location = useLocation();
-  console.log(location);
 
   const handleGoBackClick = () => {
     history.push(location?.state?.from ?? '/movies');

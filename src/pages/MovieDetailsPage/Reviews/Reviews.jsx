@@ -20,6 +20,14 @@ export default function Reviews({ movie }) {
       setReviews(response.results);
     });
     setStatus('resolved');
+    handlePageScroll();
+  };
+
+  const handlePageScroll = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -31,7 +39,6 @@ export default function Reviews({ movie }) {
           color="#b00b69"
           height={100}
           width={100}
-          timeout={1000}
         />
       )}
       {reviews.length === 0 && (

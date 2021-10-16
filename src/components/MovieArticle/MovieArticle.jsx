@@ -1,15 +1,14 @@
-import posterError from '../../components/MovieList/error.png';
+import { Link, useRouteMatch } from 'react-router-dom';
 import BackButton from '../BackButton/BackButton';
+import posterError from '../../components/MovieList/error.png';
 import { ReactComponent as BackIcon } from '../BackButton/backArrow.svg';
 import './MovieArticle.scss';
-import { Link, useRouteMatch } from 'react-router-dom';
 
 export default function MovieArticle({ movie }) {
   const { title, release_date, vote_average, poster_path, overview, genres } =
     movie;
   const { url } = useRouteMatch();
-  // console.log(url);
-  // console.log(path);
+
   const properPosterUrl = poster_path
     ? `https://image.tmdb.org/t/p/w500${poster_path}`
     : posterError;

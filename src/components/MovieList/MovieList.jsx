@@ -1,18 +1,12 @@
-import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
-import './MovieList.scss';
+import { NavLink, useLocation } from 'react-router-dom';
 import errorPoster from './error.png';
+import './MovieList.scss';
 
 export default function MovieList({ movies }) {
-  const { url, path } = useRouteMatch();
   const location = useLocation();
 
   return (
     <>
-      {movies.length === 0 && (
-        <h4 style={{ marginTop: '10px' }}>
-          Nothing to show! Use Search above😉
-        </h4>
-      )}
       <ul className="movieList">
         {movies.map(({ id, title, poster_path, release_date }) => (
           <li key={id} className="movieList__elem">

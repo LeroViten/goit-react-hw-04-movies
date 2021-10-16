@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
-import queryString from 'query-string';
-import 'react-toastify/dist/ReactToastify.css';
 import Loader from 'react-loader-spinner';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import * as movieAPI from '../../services/apiService';
 import MovieList from '../../components/MovieList/MovieList';
 import SearchForm from '../../components/SearchForm/SearchForm';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import 'react-toastify/dist/ReactToastify.css';
 import './MoviesPage.scss';
 
 export default function MoviesPage() {
@@ -61,7 +60,6 @@ export default function MoviesPage() {
           color="#b00b69"
           height={100}
           width={100}
-          timeout={1000}
         />
       )}
       <SearchForm searchHandler={handleQuery} />

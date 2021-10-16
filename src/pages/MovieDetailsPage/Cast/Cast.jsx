@@ -21,6 +21,14 @@ export default function Cast({ movie }) {
       setActors(response.cast);
     });
     setStatus('resolved');
+    handlePageScroll();
+  };
+
+  const handlePageScroll = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -32,7 +40,6 @@ export default function Cast({ movie }) {
           color="#b00b69"
           height={100}
           width={100}
-          timeout={1000}
         />
       )}
 
