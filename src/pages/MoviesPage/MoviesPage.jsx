@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation, useRouteMatch } from 'react-router';
 import { toast, ToastContainer, Zoom } from 'react-toastify';
 import Loader from 'react-loader-spinner';
 import * as movieAPI from '../../services/apiService';
@@ -10,8 +10,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import './MoviesPage.scss';
 
 export default function MoviesPage() {
-  const location = useLocation();
   const history = useHistory();
+  const location = useLocation();
+  const { url } = useRouteMatch();
   const query = new URLSearchParams(location.search).get('query');
 
   const [userQuery, setUserQuery] = useState(query ?? '');
@@ -63,7 +64,7 @@ export default function MoviesPage() {
         />
       )}
       <SearchForm searchHandler={handleQuery} />
-      <MovieList movies={movies} />
+      <MovieList movies={movies} url={url} location={location} />
       <ToastContainer transition={Zoom} autoClose={3000} />
     </>
   );

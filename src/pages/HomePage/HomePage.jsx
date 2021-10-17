@@ -30,7 +30,7 @@ export default function HomePage() {
         />
       )}
       {movies ? (
-        <MovieList movies={movies} />
+        <MovieList movies={movies} url={'movies'} location={'/'} />
       ) : (
         <h2>Error getting trending movies 😟</h2>
       )}

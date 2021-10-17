@@ -1,11 +1,9 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import errorPoster from './error.png';
 import './MovieList.scss';
 
-export default function MovieList({ movies }) {
-  const location = useLocation();
-
+export default function MovieList({ movies, url, location }) {
   return (
     <>
       <ul className="movieList">
@@ -13,7 +11,7 @@ export default function MovieList({ movies }) {
           <li key={id} className="movieList__elem">
             <NavLink
               to={{
-                pathname: `/movies/${id}`,
+                pathname: `${url}/${id}`,
                 state: { from: location },
               }}
               className="movieCardLink"
@@ -44,5 +42,4 @@ export default function MovieList({ movies }) {
 
 MovieList.propTypes = {
   movies: PropTypes.array,
-  location: PropTypes.object,
 };
