@@ -60,3 +60,14 @@ export async function fetchReviews(id) {
     console.error(error);
   }
 }
+
+export async function fetchTrailers(id) {
+  try {
+    const { data } = await axios.get(
+      `${ID_URL}/${id}/videos?api_key=${API_KEY}`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}

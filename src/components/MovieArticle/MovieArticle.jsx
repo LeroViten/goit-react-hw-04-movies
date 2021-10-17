@@ -1,13 +1,33 @@
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Loader from 'react-loader-spinner';
 import PropTypes from 'prop-types';
+import * as movieAPI from '../../services/apiService';
 import BackButton from '../BackButton/BackButton';
+import WatchTrailerButton from '../WatchTrailerButton/WatchTrailerButton';
+import Modal from '../Modal/Modal';
+import YouTubeFrame from '../YouTubeFrame/YouTubeFrame';
 import posterError from '../../components/MovieList/error.png';
 import { ReactComponent as BackIcon } from '../BackButton/backArrow.svg';
+import { ReactComponent as YouTubeIcon } from '../WatchTrailerButton/youtube-icon.svg';
 import './MovieArticle.scss';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 export default function MovieArticle({ movie }) {
-  const { title, release_date, vote_average, poster_path, overview, genres } =
-    movie;
+  const [trailers, setTrailers] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [status, setStatus] = useState('idle');
+
+  const {
+    id,
+    title,
+    release_date,
+    vote_average,
+    poster_path,
+    overview,
+    genres,
+  } = movie;
+
   const { url } = useRouteMatch();
   const location = useLocation();
 
@@ -15,12 +35,49 @@ export default function MovieArticle({ movie }) {
     ? `https://image.tmdb.org/t/p/w500${poster_path}`
     : posterError;
 
+  useEffect(() => {
+    getTrailers();
+  }, []);
+
+  const getTrailers = () => {
+    setStatus('pending');
+    movieAPI.fetchTrailers(id).then((response) => {
+      const data = response.results;
+      setTrailers(data);
+      setStatus('resolved');
+      if (status === 'resolved') {
+        toggleModal();
+      }
+    });
+  };
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
   return (
     <>
+      {status === 'pending' && (
+        <Loader
+          className="Loader"
+          type="ThreeDots"
+          color="#b00b69"
+          height={100}
+          width={100}
+        />
+      )}
       <BackButton>
         <BackIcon width="30" height="30" fill="black" />
       </BackButton>
+      {showModal && (
+        <Modal onToggle={toggleModal} aria-label="open trailers">
+          <YouTubeFrame trailers={trailers} />
+        </Modal>
+      )}
       <article className="movieArticle">
+        <WatchTrailerButton onClick={getTrailers}>
+          <YouTubeIcon width="80" height="50" />
+        </WatchTrailerButton>
         <div className="posterThumb">
           <img
             src={properPosterUrl}
