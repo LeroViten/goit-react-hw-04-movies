@@ -8,6 +8,7 @@ import SearchForm from '../../components/SearchForm/SearchForm';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './MoviesPage.scss';
+import LoadMoreButton from '../../components/LoadMoreButton/LoadMoreButton';
 
 export default function MoviesPage() {
   const history = useHistory();
@@ -17,6 +18,7 @@ export default function MoviesPage() {
 
   const [userQuery, setUserQuery] = useState(query ?? '');
   const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(1);
   const [status, setStatus] = useState('idle');
 
   useEffect(() => {
@@ -31,19 +33,27 @@ export default function MoviesPage() {
       return;
     }
     setStatus('pending');
-    movieAPI.getMovieSearch(userQuery).then((response) => {
-      const movies = response.results;
-      if (movies.length < 1) {
-        toast.error(`We've found nothing for your word 😢`);
+    movieAPI.getMovieSearch(userQuery, page).then((response) => {
+      const data = response.results;
+
+      if (data.length < 1) {
+        toast.error(`Sorry, nothing to show 😢`);
       }
-      setMovies(movies);
+      setMovies((prev) => [...prev, ...data]);
     });
+    setPage((prev) => prev + 1);
     setStatus('resolved');
+
+    if (page !== 1) {
+      handlePageScroll();
+    }
   };
 
   const handleQuery = (newQuery) => {
+    if (newQuery === userQuery) return;
     setUserQuery(newQuery);
     setMovies([]);
+    setPage(1);
 
     // pushing user search to queryString for proper return with Back button
     history.push({
@@ -51,6 +61,19 @@ export default function MoviesPage() {
       search: `query=${newQuery}`,
     });
   };
+
+  const loadMoreHandler = () => {
+    getData();
+  };
+
+  const handlePageScroll = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  };
+
+  const showLoadMore = movies.length > 0 && movies.length >= 19;
 
   return (
     <>
@@ -65,6 +88,7 @@ export default function MoviesPage() {
       )}
       <SearchForm searchHandler={handleQuery} />
       <MovieList movies={movies} url={url} location={location} />
+      {showLoadMore && <LoadMoreButton onLoadMore={loadMoreHandler} />}
       <ToastContainer transition={Zoom} autoClose={3000} />
     </>
   );

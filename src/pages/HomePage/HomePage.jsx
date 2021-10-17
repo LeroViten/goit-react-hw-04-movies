@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import Loader from 'react-loader-spinner';
 import * as movieAPI from '../../services/apiService';
 import MovieList from '../../components/MovieList/MovieList';
+import LoadMoreButton from '../../components/LoadMoreButton/LoadMoreButton';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './HomePage.scss';
-import LoadMoreButton from '../../components/LoadMoreButton/LoadMoreButton';
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -36,6 +36,7 @@ export default function HomePage() {
 
   const handlePageScroll = () => {
     window.scrollTo({
+      left: 0,
       top: document.documentElement.scrollHeight,
       behavior: 'smooth',
     });
