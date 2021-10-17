@@ -6,10 +6,10 @@ const POPULAR_URL = '/trending/movie/day';
 const SEARCH_URL = '/search/movie';
 const ID_URL = '/movie/';
 
-export async function getPopularMovies() {
+export async function getPopularMovies(page) {
   try {
     const { data } = await axios.get(
-      `${POPULAR_URL}?api_key=${API_KEY}&page=1`
+      `${POPULAR_URL}?api_key=${API_KEY}&page=${page}`
     );
     return data;
   } catch (error) {
@@ -17,10 +17,10 @@ export async function getPopularMovies() {
   }
 }
 
-export async function getMovieSearch(movie) {
+export async function getMovieSearch(movie, page) {
   try {
     const { data } = await axios.get(
-      `${SEARCH_URL}?api_key=${API_KEY}&query=${movie}&page=$1`
+      `${SEARCH_URL}?api_key=${API_KEY}&query=${movie}&page=${page}`
     );
     return data;
   } catch (error) {

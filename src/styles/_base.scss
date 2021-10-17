@@ -8,3 +8,9 @@ body {
 button {
   cursor: pointer;
 }
+.Toastify__toast--error {
+  border: 1px solid #eb0e0e;
+  font-weight: bold;
+  border-radius: 10px !important;
+  background: rgb(228, 157, 160) !important;
+}
