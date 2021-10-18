@@ -8,7 +8,7 @@ export default function AppBar() {
   return (
     <header>
       <Navigation />
-      <input type="checkbox" onChange={toggleTheme}></input>
+      <input type="checkbox" checked={isDark} onChange={toggleTheme}></input>
     </header>
   );
 }

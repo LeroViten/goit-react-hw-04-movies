@@ -1,9 +1,9 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
 
   const updateBodyStyles = () => {
     if (isDark) {
@@ -19,7 +19,17 @@ export const ThemeProvider = ({ children }) => {
   const toggleTheme = () => {
     setIsDark(!isDark);
     updateBodyStyles();
+    localStorage.setItem('isDark', JSON.stringify(!isDark));
   };
+
+  useEffect(() => {
+    const isDark = localStorage.getItem('isDark') === 'true';
+    setIsDark(isDark);
+  }, []);
+
+  useEffect(() => {
+    updateBodyStyles();
+  }, [updateBodyStyles]);
 
   return (
     <ThemeContext.Provider value={[{ isDark }, toggleTheme]}>
