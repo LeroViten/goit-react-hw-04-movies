@@ -17,3 +17,7 @@
     box-shadow: $box-shadow;
   }
 }
+
+body.dark .backButton {
+  background-color: #555a5a69;
+}

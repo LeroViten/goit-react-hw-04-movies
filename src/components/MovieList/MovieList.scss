@@ -40,7 +40,19 @@
   }
 }
 
+body.dark .movieList__elem {
+  background-color: rgba(92, 108, 110, 0.267);
+}
+
 .movieCardLink {
   text-decoration: none;
   color: #000;
+}
+
+body.dark .movieCardLink {
+  color: rgb(141, 141, 141);
+}
+
+.poster {
+  border-radius: 4px;
 }

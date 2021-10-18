@@ -25,6 +25,10 @@
   margin: 0;
 }
 
+body.dark .infoThumb {
+  color: grey;
+}
+
 .movieTitle {
   margin-top: 0;
   margin-bottom: 10px;
@@ -54,6 +58,9 @@
   border: 2px solid #b00b6842;
   box-shadow: $box-shadow;
 }
+body.dark .additionalInfoThumb {
+  color: grey;
+}
 
 .additionalText {
   text-align: center;
@@ -77,5 +84,13 @@
   &:hover {
     background-color: #cab7c3f1;
     transform: scale(0.98);
+  }
+}
+
+body.dark .showAddonLink {
+  background-color: rgb(115, 134, 134);
+
+  &:hover {
+    background-color: rgb(77, 97, 102);
   }
 }
